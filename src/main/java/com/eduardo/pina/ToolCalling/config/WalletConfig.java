@@ -6,6 +6,8 @@ import com.eduardo.pina.ToolCalling.api.WalletResponse;
 import com.eduardo.pina.ToolCalling.repositories.WalletRepository;
 import com.eduardo.pina.ToolCalling.service.StockService;
 import com.eduardo.pina.ToolCalling.service.WalletService;
+import com.eduardo.pina.ToolCalling.tools.StockTools;
+import com.eduardo.pina.ToolCalling.tools.WalletTools;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
@@ -32,5 +34,15 @@ public class WalletConfig {
     @Description("Latest Stock Prices")
     public Function<StockRequest, StockResponse> latestStockPrice(){
         return new StockService(restTemplate());
+    }
+
+    @Bean
+    public WalletTools walletTools(WalletRepository repository){
+        return new WalletTools(repository);
+    }
+
+    @Bean
+    public StockTools StockTools(){
+        return new StockTools(restTemplate());
     }
 }
